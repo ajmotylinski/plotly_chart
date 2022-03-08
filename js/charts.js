@@ -15,8 +15,9 @@ function init() {
 
     // Use the first sample from the list to build the initial plots
     var firstSample = sampleNames[0];
-    buildCharts(firstSample);
     buildMetadata(firstSample);
+    buildCharts(firstSample);
+    
   });
 }
 
@@ -101,5 +102,37 @@ function buildCharts(sample) {
     };
     // 10. Use Plotly to plot the data with the layout. 
     Plotly.newPlot("bar", data, barLayout)
+
+     // 1. Create the trace for the bubble chart.
+     var trace = [{
+       x: otu_ids,
+       y: sample_values,
+       text: otu_labels,
+       mode: "markers",
+       marker: {
+         size: sample_values,
+         color: otu_ids,
+         colorscale:"geyser"
+      }
+   }
+    ];
+
+    // 2. Create the layout for the bubble chart.
+    var bubbleLayout = {
+      title: "Bacteria Cultures Per Sample",
+      xaxis: {title:"OTU ID"},
+      margin: {
+        l: 75,
+        r: 75,
+        t: 75,
+        b:30
+      },
+      hovermode:'closest'
+    };
+
+        // 3. Use Plotly to plot the data with the layout.
+    Plotly.newPlot("bubble", trace, bubbleLayout);
+
+
   });
 }
