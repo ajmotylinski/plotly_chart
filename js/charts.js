@@ -82,7 +82,8 @@ function buildCharts(sample) {
       x: top10_values,
       y: yticks,
       text: top10_labels,
-      type: "bar"
+      type: "bar",
+      orientation: 'h'
     };
 
     var data = [barData];
